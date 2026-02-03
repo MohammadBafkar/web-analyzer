@@ -17,7 +17,7 @@ spec:
       containers:
         - name: web-analyzer
           image: web-analyzer:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
               name: http

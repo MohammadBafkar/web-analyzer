@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error - Web Analyzer</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="/" class="logo-link">
+          <h1>🔍 Web Analyzer</h1>
+        </a>
+      </header>
+
+      <main>
+        <section class="error-section">
+          <div class="error-icon">⚠️</div>
+          <h2>Unable to Analyze URL</h2>
+
+          {{ if .RemoteStatusCode }}
+          <div class="error-code">
+            <span class="status-code">HTTP {{ .RemoteStatusCode }}</span>
+          </div>
+          {{ end }}
+
+          <p class="error-message">{{ .Message }}</p>
+
+          <div class="error-help">
+            <h3>Possible causes:</h3>
+            <ul>
+              <li>The URL may be incorrect or misspelled</li>
+              <li>The website may be temporarily unavailable</li>
+              <li>The website may block automated requests</li>
+              <li>There may be network connectivity issues</li>
+            </ul>
+          </div>
+
+          <div class="actions">
+            <a href="/" class="btn-primary">Try Another URL</a>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

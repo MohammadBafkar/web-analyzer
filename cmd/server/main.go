@@ -14,7 +14,11 @@ func main() {
 	}
 
 	r := gin.Default()
+	r.LoadHTMLGlob("web/templates/*.html")
+	r.Static("/static", "./web/static")
 
+	r.GET("/", handlers.HandleIndex)
+	r.POST("/analyze", handlers.HandleAnalyze)
 	r.GET("/healthz", handlers.HandleHealth)
 	r.GET("/readyz", handlers.HandleReady)
 

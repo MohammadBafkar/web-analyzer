@@ -6,33 +6,35 @@ namespace: web-analyzer-staging
 namePrefix: staging-
 
 resources:
-  - ../../base
+- ../../base
 
 patches:
-  - patch: |
-      - op: replace
-        path: /spec/replicas
-        value: 2
-    target:
-      kind: Deployment
-      name: web-analyzer
-  - patch: |
-      - op: replace
-        path: /metadata/name
-        value: web-analyzer-staging
-    target:
-      kind: Namespace
-  - patch: |
-      - op: replace
-        path: /spec/template/spec/containers/0/resources/limits/memory
-        value: 512Mi
-    target:
-      kind: Deployment
-      name: web-analyzer
+- patch: |
+    - op: replace
+      path: /spec/replicas
+      value: 2
+  target:
+    kind: Deployment
+    name: web-analyzer
+- patch: |
+    - op: replace
+      path: /metadata/name
+      value: web-analyzer-staging
+  target:
+    kind: Namespace
+- patch: |
+    - op: replace
+      path: /spec/template/spec/containers/0/resources/limits/memory
+      value: 512Mi
+  target:
+    kind: Deployment
+    name: web-analyzer
 
 images:
-  - name: web-analyzer
-    newTag: staging
+- name: web-analyzer
+  newTag: staging
 
-commonLabels:
-  environment: staging
+labels:
+- includeSelectors: true
+  pairs:
+    environment: staging

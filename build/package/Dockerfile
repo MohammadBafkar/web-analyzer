@@ -18,9 +18,11 @@ RUN CGO_ENABLED=0 GOOS=linux \
 FROM alpine:3.19
 
 RUN apk add --no-cache ca-certificates tzdata curl && \
-    adduser -D -g '' appuser
+    addgroup -g 1000 appgroup && \
+    adduser -D -u 1000 -G appgroup -g '' appuser
 
 COPY --from=builder /app/web-analyzer /web-analyzer
+COPY --from=builder /app/web /web
 
 EXPOSE 8080
 

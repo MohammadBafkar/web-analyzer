@@ -6,32 +6,35 @@ namespace: web-analyzer-dev
 namePrefix: dev-
 
 resources:
-  - ../../base
+- ../../base
 
 patches:
-  - patch: |
-      - op: replace
-        path: /spec/replicas
-        value: 1
-    target:
-      kind: Deployment
-      name: web-analyzer
-  - patch: |
-      - op: replace
-        path: /metadata/name
-        value: web-analyzer-dev
-    target:
-      kind: Namespace
+- patch: |
+    - op: replace
+      path: /spec/replicas
+      value: 1
+  target:
+    kind: Deployment
+    name: web-analyzer
+- patch: |
+    - op: replace
+      path: /metadata/name
+      value: web-analyzer-dev
+  target:
+    kind: Namespace
 
 images:
-  - name: web-analyzer
-    newTag: dev
+- name: web-analyzer
+  newTag: dev
 
-commonLabels:
-  environment: development
 
 configMapGenerator:
-  - name: web-analyzer-config
-    behavior: merge
-    literals:
-      - GIN_MODE=debug
+- behavior: merge
+  literals:
+  - GIN_MODE=debug
+  name: web-analyzer-config
+
+labels:
+- includeSelectors: true
+  pairs:
+    environment: development

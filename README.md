@@ -22,9 +22,14 @@ The project is structured as follows:
 │   └── server
 │       └── main.go
 ├── internal
+│   ├── analyzer
+│   │   └── analyzer.go
+│   ├── fetcher
+│   │   └── fetcher.go
 │   └── handlers
 │       └── handlers.go
 ├── docs
+│   ├── ambiguities-assumptions-improvements.md
 │   └── requirement.md
 ├── deploy
 │   ├── base
@@ -39,6 +44,13 @@ The project is structured as follows:
 │       └── prod
 ├── scripts
 │   └── k8s-local.sh
+├── web
+│   ├── static
+│   │   ├── style.css
+│   └── templates
+│       ├── error.html
+│       ├── index.html
+│       └── results.html
 ├── go.mod
 ├── go.sum
 ├── Makefile
@@ -78,9 +90,7 @@ The application includes Kubernetes manifests using Kustomize for different envi
 - `kubectl` CLI installed
 - `kustomize` (optional, kubectl has built-in kustomize support)
 
-### Local Kubernetes Deployment
-
-For local development using Docker Desktop Kubernetes:
+### Commands
 
 ```bash
 # Deploy to local Kubernetes
@@ -89,8 +99,6 @@ make k8s-local
 # Or run the script directly
 ./scripts/k8s-local.sh
 ```
-
-### Deploy to Different Environments
 
 ```bash
 # Deploy to dev environment
@@ -103,8 +111,6 @@ make k8s-deploy-staging
 make k8s-deploy-prod
 ```
 
-### Other Kubernetes Commands
-
 ```bash
 # View deployment status
 make k8s-status ENV=dev
@@ -116,22 +122,6 @@ make k8s-delete ENV=dev
 make k8s-logs ENV=dev
 ```
 
-### Directory Structure
-
-```
-deploy/
-├── base/                    # Base Kubernetes manifests
-│   ├── configmap.yaml
-│   ├── deployment.yaml
-│   ├── kustomization.yaml
-│   ├── namespace.yaml
-│   └── service.yaml
-└── overlays/               # Environment-specific overlays
-    ├── dev/
-    ├── staging/
-    └── prod/
-```
-
 ## CI/CD
 
 ### Continuous Integration (GitHub Actions)
@@ -139,10 +129,8 @@ deploy/
 The project includes comprehensive CI workflows:
 
 | Workflow | Trigger | Description |
-|----------|---------|-------------|
+| ---------- | --------- | ------------- |
 | **CI** | Push/PR to main, develop | Lint, test, build, security scan |
-| **Release** | Tag push (v*) | Create GitHub release with binaries and Docker images |
-| **CodeQL** | Push/PR to main, weekly | Security and code quality analysis |
 
 #### CI Pipeline Stages
 
@@ -150,8 +138,7 @@ The project includes comprehensive CI workflows:
 2. **Test** - Unit tests with race detection and coverage
 3. **Build** - Binary compilation for Linux AMD64
 4. **Docker** - Build and test Docker image
-5. **Security** - Gosec and govulncheck scanning
-6. **Dependency Review** - PR dependency analysis
+5. **Dependency Review** - PR dependency analysis
 
 ### Automated Dependency Updates
 
@@ -161,8 +148,9 @@ Dependabot is configured for:
 - GitHub Actions (weekly)
 - Docker base images (weekly)
 
-## Improvements
+## Documentation
 
-- [ ]  Continuous Deployment (CD) pipeline setup (e.g., Deploy to Azure AKS or AWS EKS using GitHub Actions and Terraform)
-- [ ]  Add metrics, tracing, and logging (e.g., Grafana Stack and OpenTelemetry)
-- [ ]  AuthN/AuthZ
+Additional documentation can be found in the `docs/` directory:
+
+- [Requirement Document](docs/requirement.md)
+- [Ambiguities, Assumptions, and Possible Improvements](docs/ambiguities-assumptions-improvements.md)

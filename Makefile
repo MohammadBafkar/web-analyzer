@@ -7,6 +7,9 @@ DOCKER_TAG := latest
 GO := go
 GOFLAGS := -v
 
+# Docker variables
+DOCKERFILE := build/package/Dockerfile
+
 # Kubernetes variables
 K8S_NAMESPACE_DEV := web-analyzer-dev
 K8S_NAMESPACE_STAGING := web-analyzer-staging
@@ -76,7 +79,7 @@ vet:
 ## docker-build: Build Docker image
 docker-build:
 	@echo "Building Docker image..."
-	docker build -t $(DOCKER_IMAGE):$(DOCKER_TAG) .
+	docker build -t $(DOCKER_IMAGE):$(DOCKER_TAG) -f $(DOCKERFILE) .
 
 ## docker-run: Run Docker container
 docker-run:

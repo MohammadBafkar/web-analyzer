@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analysis Results - Web Analyzer</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="/" class="logo-link">
+          <h1>🔍 Web Analyzer</h1>
+        </a>
+      </header>
+
+      <main>
+        <section class="results">
+          <h2>Analysis Results</h2>
+          <p class="analyzed-url">{{ .Result.URL }}</p>
+          <p class="analyzed-time">
+            Analyzed at {{ .Result.AnalyzedAt.Format "2006-01-02 15:04:05" }}
+          </p>
+
+          <div class="result-grid">
+            <!-- HTML Version -->
+            <div class="result-card">
+              <div class="result-icon">📄</div>
+              <div class="result-content">
+                <h3>HTML Version</h3>
+                <p class="result-value">{{ .Result.HTMLVersion }}</p>
+              </div>
+            </div>
+
+            <!-- Page Title -->
+            <div class="result-card">
+              <div class="result-icon">📝</div>
+              <div class="result-content">
+                <h3>Page Title</h3>
+                <p class="result-value">
+                  {{ if .Result.Title }}{{ .Result.Title }}{{ else }}<em
+                    >No title found</em
+                  >{{ end }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Headings -->
+            <div class="result-card">
+              <div class="result-icon">🔤</div>
+              <div class="result-content">
+                <h3>Headings</h3>
+                <div class="headings-list">
+                  {{ if .Result.Headings }} {{ range $tag, $count :=
+                  .Result.Headings }}
+                  <span class="heading-tag">{{ $tag }}: {{ $count }}</span>
+                  {{ end }} {{ else }}
+                  <p class="result-value"><em>No headings found</em></p>
+                  {{ end }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Links -->
+            <div class="result-card">
+              <div class="result-icon">🔗</div>
+              <div class="result-content">
+                <h3>Links</h3>
+                <div class="links-summary">
+                  <div class="link-stat">
+                    <span class="link-label">Internal:</span>
+                    <span class="link-value">{{ .Result.InternalLinks }}</span>
+                  </div>
+                  <div class="link-stat">
+                    <span class="link-label">External:</span>
+                    <span class="link-value">{{ .Result.ExternalLinks }}</span>
+                  </div>
+                  <div
+                    class="link-stat {{ if gt .Result.InaccessibleLinks 0 }}warning{{ end }}"
+                  >
+                    <span class="link-label">Inaccessible:</span>
+                    <span class="link-value"
+                      >{{ .Result.InaccessibleLinks }}</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Login Form -->
+            <div class="result-card">
+              <div class="result-icon">🔐</div>
+              <div class="result-content">
+                <h3>Login Form</h3>
+                <p
+                  class="result-value {{ if .Result.HasLoginForm }}detected{{ end }}"
+                >
+                  {{ if .Result.HasLoginForm }} ✅ Login form detected {{ else
+                  }} ❌ No login form found {{ end }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <a href="/" class="btn-primary">Analyze Another URL</a>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
