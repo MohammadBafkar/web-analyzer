@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-analyzer-config
+  labels:
+    app: web-analyzer
+data:
+  PORT: "8080"
+  GIN_MODE: "release"
+  REQUEST_TIMEOUT: "30s"
+  LINK_CHECK_TIMEOUT: "5s"
+  MAX_CONCURRENT_CHECKS: "10"

@@ -1,0 +1,98 @@
+run:
+  timeout: 5m
+  modules-download-mode: readonly
+
+linters:
+  enable:
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    - bodyclose
+    - dogsled
+    - dupl
+    - errorlint
+    - exhaustive
+    - exportloopref
+    - gocognit
+    - goconst
+    - gocritic
+    - gocyclo
+    - godot
+    - goimports
+    - gomnd
+    - goprintffuncname
+    - gosec
+    - misspell
+    - nakedret
+    - nolintlint
+    - prealloc
+    - revive
+    - rowserrcheck
+    - sqlclosecheck
+    - stylecheck
+    - unconvert
+    - unparam
+    - whitespace
+
+linters-settings:
+  errcheck:
+    check-type-assertions: true
+    check-blank: true
+
+  govet:
+    enable-all: true
+
+  gocyclo:
+    min-complexity: 15
+
+  gocognit:
+    min-complexity: 20
+
+  dupl:
+    threshold: 100
+
+  goconst:
+    min-len: 3
+    min-occurrences: 3
+
+  misspell:
+    locale: US
+
+  revive:
+    rules:
+      - name: blank-imports
+      - name: context-as-argument
+      - name: context-keys-type
+      - name: dot-imports
+      - name: error-return
+      - name: error-strings
+      - name: error-naming
+      - name: exported
+      - name: if-return
+      - name: increment-decrement
+      - name: var-naming
+      - name: package-comments
+      - name: range
+      - name: receiver-naming
+      - name: time-naming
+      - name: unexported-return
+      - name: indent-error-flow
+      - name: errorf
+
+  stylecheck:
+    checks:
+      - all
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - dupl
+        - gomnd
+        - goconst
+
+  max-issues-per-linter: 50
+  max-same-issues: 3
