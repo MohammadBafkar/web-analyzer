@@ -15,7 +15,7 @@ RUN CGO_ENABLED=0 GOOS=linux \
     -a \
     -o web-analyzer ./cmd/server/main.go
 
-FROM alpine:3.19
+FROM alpine:3.23
 
 RUN apk add --no-cache ca-certificates tzdata curl && \
     addgroup -g 1000 appgroup && \
