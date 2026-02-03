@@ -31,6 +31,6 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
 
 ENV GIN_MODE=release
 
-USER appuser:appuser
+USER appuser:appgroup
 
 ENTRYPOINT ["/web-analyzer"]
