@@ -138,14 +138,6 @@ The project includes comprehensive CI workflows:
 4. **Docker** - Build and test Docker image
 5. **Dependency Review** - PR dependency analysis
 
-### Automated Dependency Updates
-
-Dependabot is configured for:
-
-- Go modules (weekly)
-- GitHub Actions (weekly)
-- Docker base images (weekly)
-
 ## Documentation
 
 Additional documentation can be found in the `docs/` directory:
