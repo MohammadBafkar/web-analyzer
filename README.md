@@ -72,8 +72,6 @@ run `make run` to start the application. By default, the server will start on po
 
 run `make test` to execute the unit tests for the application.
 
-## Deploy
-
 ## Docker
 
 run `make docker-build` to build the Docker image for the application.
