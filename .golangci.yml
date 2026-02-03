@@ -4,15 +4,44 @@ run:
   timeout: 5m
 
 linters:
+  default: standard
   enable:
+    - bodyclose
     - errcheck
-    - govet
-    - staticcheck
-    - unused
-    - gosec
     - errorlint
     - gocritic
+    - gosec
+    - govet
+    - ineffassign
+    - misspell
+    - nilerr
+    - prealloc
+    - staticcheck
+    - unconvert
+    - unused
+  disable:
+    - depguard
+    - err113
+    - exhaustruct
+    - gocognit
+    - lll
+    - mnd
+    - nakedret
+    - nestif
+    - nlreturn
+    - noctx
+    - noinlineerr
+    - nonamedreturns
+    - paralleltest
+    - revive
+    - testpackage
+    - varnamelen
+    - wsl
+    - wsl_v5
 
 formatters:
   enable:
+    - gci
+    - gofmt
+    - gofumpt
     - goimports

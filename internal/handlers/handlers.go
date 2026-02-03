@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"errors"
 	"net/http"
 	"strings"
 
@@ -36,7 +37,8 @@ func HandleAnalyze(c *gin.Context) {
 
 	result, err := fetcher.FetchURL(url)
 	if err != nil {
-		if fetchErr, ok := err.(*fetcher.Error); ok {
+		var fetchErr *fetcher.Error
+		if errors.As(err, &fetchErr) {
 			renderError(c, http.StatusUnprocessableEntity, fetchErr.Message, fetchErr.StatusCode)
 		} else {
 			renderError(c, http.StatusUnprocessableEntity, err.Error(), 0)

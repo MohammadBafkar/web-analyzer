@@ -113,7 +113,7 @@ func analyzeLinks(doc *goquery.Document, baseURL string) (internal, external, in
 			strings.HasPrefix(href, "tel:") {
 			return
 		}
-		
+
 		fullURL := fetcher.ResolveURL(baseURL, href)
 		if fullURL == "" {
 			return
@@ -136,7 +136,6 @@ func analyzeLinks(doc *goquery.Document, baseURL string) (internal, external, in
 
 	return
 }
-
 
 func detectLoginForm(doc *goquery.Document) bool {
 	if doc.Find("input[type='password'], input[type=\"password\"]").Length() > 0 {

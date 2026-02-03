@@ -56,7 +56,7 @@ func FetchURL(url string) (*Result, error) {
 	if err != nil {
 		return nil, &Error{Message: fmt.Sprintf("failed to fetch URL: %v", err)}
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	if resp.StatusCode >= 400 {
 		return nil, &Error{
@@ -169,7 +169,7 @@ func CheckLinkAccessibility(links []string) int {
 				mu.Unlock()
 				return
 			}
-			defer resp.Body.Close()
+			defer func() { _ = resp.Body.Close() }()
 
 			if resp.StatusCode >= 400 {
 				mu.Lock()
