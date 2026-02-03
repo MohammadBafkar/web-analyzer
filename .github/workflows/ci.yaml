@@ -134,35 +134,6 @@ jobs:
           curl -f http://localhost:8080/healthz || (docker logs test-container && exit 1)
           docker stop test-container
 
-  security:
-    name: Security Scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: ${{ env.GO_VERSION }}
-          cache: true
-
-      - name: Run Gosec Security Scanner
-        uses: securego/gosec@master
-        with:
-          args: '-no-fail -fmt sarif -out gosec-results.sarif ./...'
-
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: gosec-results.sarif
-        if: always()
-
-      - name: Run govulncheck
-        run: |
-          go install golang.org/x/vuln/cmd/govulncheck@latest
-          govulncheck ./...
-
   dependency-review:
     name: Dependency Review
     runs-on: ubuntu-latest

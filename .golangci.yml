@@ -1,3 +1,5 @@
+version: "2"
+
 run:
   timeout: 5m
   modules-download-mode: readonly
@@ -15,14 +17,13 @@ linters:
     - dupl
     - errorlint
     - exhaustive
-    - exportloopref
     - gocognit
     - goconst
     - gocritic
     - gocyclo
     - godot
     - goimports
-    - gomnd
+    - mnd
     - goprintffuncname
     - gosec
     - misspell
@@ -37,61 +38,61 @@ linters:
     - unparam
     - whitespace
 
-linters-settings:
-  errcheck:
-    check-type-assertions: true
-    check-blank: true
+  settings:
+    errcheck:
+      check-type-assertions: true
+      check-blank: true
 
-  govet:
-    enable-all: true
+    govet:
+      enable-all: true
 
-  gocyclo:
-    min-complexity: 15
+    gocyclo:
+      min-complexity: 15
 
-  gocognit:
-    min-complexity: 20
+    gocognit:
+      min-complexity: 20
 
-  dupl:
-    threshold: 100
+    dupl:
+      threshold: 100
 
-  goconst:
-    min-len: 3
-    min-occurrences: 3
+    goconst:
+      min-len: 3
+      min-occurrences: 3
 
-  misspell:
-    locale: US
+    misspell:
+      locale: US
 
-  revive:
-    rules:
-      - name: blank-imports
-      - name: context-as-argument
-      - name: context-keys-type
-      - name: dot-imports
-      - name: error-return
-      - name: error-strings
-      - name: error-naming
-      - name: exported
-      - name: if-return
-      - name: increment-decrement
-      - name: var-naming
-      - name: package-comments
-      - name: range
-      - name: receiver-naming
-      - name: time-naming
-      - name: unexported-return
-      - name: indent-error-flow
-      - name: errorf
+    revive:
+      rules:
+        - name: blank-imports
+        - name: context-as-argument
+        - name: context-keys-type
+        - name: dot-imports
+        - name: error-return
+        - name: error-strings
+        - name: error-naming
+        - name: exported
+        - name: if-return
+        - name: increment-decrement
+        - name: var-naming
+        - name: package-comments
+        - name: range
+        - name: receiver-naming
+        - name: time-naming
+        - name: unexported-return
+        - name: indent-error-flow
+        - name: errorf
 
-  stylecheck:
-    checks:
-      - all
+    stylecheck:
+      checks:
+        - all
 
 issues:
   exclude-rules:
     - path: _test\.go
       linters:
         - dupl
-        - gomnd
+        - mnd
         - goconst
 
   max-issues-per-linter: 50
